@@ -32,24 +32,24 @@ export default function TodoFilter({ filter, onChange, categories, total, active
   const set = (patch: Partial<FilterState>) => onChange({ ...filter, ...patch })
 
   return (
-    <div className="space-y-3 rounded-2xl border border-stone-200 bg-white p-3 shadow-sm sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
+    <div className="space-y-3 rounded-2xl border border-neutral-800 bg-neutral-900 p-3 shadow-sm sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="grid grid-cols-3 rounded-xl bg-stone-100 p-0.5">
+        <div className="grid grid-cols-3 rounded-xl bg-neutral-800 p-0.5">
           {STATUS_TABS.map(tab => (
             <button
               key={tab.value}
               onClick={() => set({ status: tab.value })}
               className={`min-h-9 rounded-lg px-2 text-xs font-medium transition-colors ${
                 filter.status === tab.value
-                  ? 'bg-white text-stone-800 shadow-sm'
-                  : 'text-stone-500 hover:text-stone-700'
+                  ? 'bg-neutral-700 text-neutral-100 shadow-sm'
+                  : 'text-neutral-500 hover:text-neutral-300'
               }`}
             >
               {tab.label}
             </button>
           ))}
         </div>
-        <span className="text-xs text-stone-500 sm:text-stone-400">
+        <span className="text-xs text-neutral-500">
           {active}개 진행 중 / {total}개 전체
         </span>
       </div>
@@ -58,7 +58,7 @@ export default function TodoFilter({ filter, onChange, categories, total, active
         <select
           value={filter.category}
           onChange={e => set({ category: e.target.value })}
-          className="min-h-10 w-full rounded-xl border border-stone-200 bg-stone-50 px-3 text-sm text-stone-600 outline-none focus:border-indigo-400"
+          className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500"
         >
           {categories.map(c => (
             <option key={c} value={c}>{c === 'all' ? '모든 카테고리' : c}</option>
@@ -68,7 +68,7 @@ export default function TodoFilter({ filter, onChange, categories, total, active
         <select
           value={filter.priority}
           onChange={e => set({ priority: e.target.value as Priority | 'all' })}
-          className="min-h-10 w-full rounded-xl border border-stone-200 bg-stone-50 px-3 text-sm text-stone-600 outline-none focus:border-indigo-400"
+          className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500"
         >
           {PRIORITY_OPTIONS.map(p => (
             <option key={p.value} value={p.value}>{p.value === 'all' ? '모든 우선순위' : p.label}</option>
@@ -78,7 +78,7 @@ export default function TodoFilter({ filter, onChange, categories, total, active
         <select
           value={filter.sortBy}
           onChange={e => set({ sortBy: e.target.value as FilterState['sortBy'] })}
-          className="min-h-10 w-full rounded-xl border border-stone-200 bg-stone-50 px-3 text-sm text-stone-600 outline-none focus:border-indigo-400 sm:w-auto"
+          className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500 sm:w-auto"
         >
           {SORT_OPTIONS.map(s => (
             <option key={s.value} value={s.value}>{s.label}</option>

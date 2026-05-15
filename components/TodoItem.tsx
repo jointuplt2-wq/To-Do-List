@@ -20,9 +20,9 @@ const PRIORITY_LABEL: Record<Priority, string> = {
 }
 
 const PRIORITY_BADGE: Record<Priority, string> = {
-  high: 'bg-red-50 text-red-600',
-  medium: 'bg-amber-50 text-amber-600',
-  low: 'bg-sky-50 text-sky-600',
+  high: 'bg-red-900/40 text-red-400',
+  medium: 'bg-amber-900/40 text-amber-400',
+  low: 'bg-sky-900/40 text-sky-400',
 }
 
 function isOverdue(deadline: string | null): boolean {
@@ -40,14 +40,14 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
 
   return (
     <div
-      className={`group flex items-start gap-3 rounded-2xl border-b border-r border-t border-stone-100 border-l-4 bg-white px-3 py-3 shadow-sm transition-shadow hover:shadow-md sm:px-4 ${PRIORITY_BORDER[todo.priority]} ${todo.completed ? 'opacity-55' : ''}`}
+      className={`group flex items-start gap-3 rounded-2xl border-b border-r border-t border-neutral-800 border-l-4 bg-neutral-900 px-3 py-3 shadow-sm transition-shadow hover:shadow-md sm:px-4 ${PRIORITY_BORDER[todo.priority]} ${todo.completed ? 'opacity-50' : ''}`}
     >
       <button
         onClick={() => onToggle(todo.id)}
         className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors sm:h-6 sm:w-6 ${
           todo.completed
             ? 'border-indigo-500 bg-indigo-500'
-            : 'border-stone-300 hover:border-indigo-400'
+            : 'border-neutral-600 hover:border-indigo-400'
         }`}
         aria-label={todo.completed ? '완료 해제' : '완료 처리'}
       >
@@ -59,13 +59,13 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
       </button>
 
       <div className="min-w-0 flex-1">
-        <p className={`break-words text-sm font-medium leading-snug text-stone-800 ${todo.completed ? 'text-stone-400 line-through' : ''}`}>
+        <p className={`break-words text-sm font-medium leading-snug ${todo.completed ? 'text-neutral-600 line-through' : 'text-neutral-100'}`}>
           {todo.title}
         </p>
 
         <div className="mt-2 flex flex-wrap items-center gap-1.5">
           {todo.category && (
-            <span className="max-w-full truncate rounded-full bg-violet-50 px-2 py-0.5 text-xs font-medium text-violet-600">
+            <span className="max-w-full truncate rounded-full bg-violet-900/40 px-2 py-0.5 text-xs font-medium text-violet-400">
               {todo.category}
             </span>
           )}
@@ -75,7 +75,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
           </span>
 
           {todo.deadline && (
-            <span className={`flex items-center gap-1 text-xs font-medium ${overdue ? 'text-red-500' : 'text-stone-500'}`}>
+            <span className={`flex items-center gap-1 text-xs font-medium ${overdue ? 'text-red-400' : 'text-neutral-500'}`}>
               <svg className="h-3 w-3" fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth={1.5}>
                 <rect x="2" y="3" width="12" height="11" rx="2" />
                 <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
@@ -86,14 +86,14 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
           )}
 
           {todo.tags.map(tag => (
-            <span key={tag} className="max-w-full truncate text-xs text-indigo-500">#{tag}</span>
+            <span key={tag} className="max-w-full truncate text-xs text-indigo-400">#{tag}</span>
           ))}
         </div>
       </div>
 
       <button
         onClick={() => onDelete(todo.id)}
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-stone-300 transition-all hover:bg-red-50 hover:text-red-500 sm:opacity-0 sm:group-hover:opacity-100"
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-neutral-600 transition-all hover:bg-red-900/40 hover:text-red-400 sm:opacity-0 sm:group-hover:opacity-100"
         aria-label="삭제"
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth={1.7}>

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "할 일 목록",
+  title: "My To-Do",
   description: "카테고리, 태그, 마감일, 우선순위를 지원하는 할 일 앱입니다.",
   icons: {
     icon: "/icon.svg",

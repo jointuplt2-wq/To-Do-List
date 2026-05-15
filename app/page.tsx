@@ -10,18 +10,18 @@ export default function Home() {
   const activeCount = allTodos.filter(t => !t.completed).length
 
   return (
-    <main className="min-h-dvh bg-stone-50">
+    <main className="min-h-dvh bg-neutral-950">
       <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col px-4 pb-8 pt-5 sm:px-6 sm:py-10">
         <header className="mb-5 flex items-center gap-3 sm:mb-8">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-sm">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-indigo-500 text-white shadow-sm">
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 7h14M5 12h10M5 17h6" />
               <path strokeLinecap="round" strokeLinejoin="round" d="m16 16 2 2 4-5" />
             </svg>
           </div>
           <div className="min-w-0">
-            <h1 className="truncate text-xl font-bold tracking-tight text-stone-900 sm:text-2xl">할 일 목록</h1>
-            <p className="mt-0.5 text-sm text-stone-500">오늘 할 일을 빠르게 정리하세요.</p>
+            <h1 className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">My To-Do</h1>
+            <p className="mt-0.5 text-sm text-neutral-400">오늘 할 일을 빠르게 정리하세요.</p>
           </div>
         </header>
 
@@ -40,13 +40,13 @@ export default function Home() {
 
           {!loaded && (
             <div className="flex justify-center py-12">
-              <div className="h-5 w-5 animate-spin rounded-full border-2 border-indigo-300 border-t-indigo-600" />
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-indigo-700 border-t-indigo-400" />
             </div>
           )}
 
           {loaded && todos.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-stone-200 bg-white px-4 py-14 text-center text-stone-400">
-              <svg className="mx-auto mb-3 h-10 w-10 text-stone-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
+            <div className="rounded-2xl border border-dashed border-neutral-700 bg-neutral-900 px-4 py-14 text-center text-neutral-500">
+              <svg className="mx-auto mb-3 h-10 w-10 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 4.5h12A1.5 1.5 0 0 1 19.5 6v12A1.5 1.5 0 0 1 18 19.5H6A1.5 1.5 0 0 1 4.5 18V6A1.5 1.5 0 0 1 6 4.5Z" />
               </svg>
