@@ -13,44 +13,42 @@ const PRIORITIES: { value: Priority; label: string }[] = [
   { value: 'low', label: '낮음' },
 ]
 
+const PRESET_CATEGORIES = ['개인', '공부', '건강', '쇼핑', '기타']
+const PRESET_TAGS = ['중요', '긴급', '전화', '이메일', '집', '오늘', '이번주', '반복']
+
 export default function TodoForm({ onAdd, categories }: Props) {
   const [open, setOpen] = useState(false)
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('')
-  const [newCategory, setNewCategory] = useState('')
-  const [tagInput, setTagInput] = useState('')
   const [tags, setTags] = useState<string[]>([])
   const [deadline, setDeadline] = useState('')
   const [priority, setPriority] = useState<Priority>('medium')
 
-  const addTag = () => {
-    const trimmed = tagInput.trim()
-    if (trimmed && !tags.includes(trimmed)) setTags(prev => [...prev, trimmed])
-    setTagInput('')
-  }
-
-  const removeTag = (tag: string) => setTags(prev => prev.filter(t => t !== tag))
+  const toggleTag = (tag: string) =>
+    setTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!title.trim()) return
-    const resolvedCategory = newCategory.trim() || category || '일반'
     onAdd({
       title: title.trim(),
-      category: resolvedCategory,
+      category: category || '일반',
       tags,
       deadline: deadline || null,
       priority,
     })
     setTitle('')
     setCategory('')
-    setNewCategory('')
-    setTagInput('')
     setTags([])
     setDeadline('')
     setPriority('medium')
     setOpen(false)
   }
+
+  const allCategories = Array.from(new Set([
+    ...PRESET_CATEGORIES,
+    ...categories.filter(c => c !== 'all' && !PRESET_CATEGORIES.includes(c)),
+  ]))
 
   if (!open) {
     return (
@@ -80,27 +78,16 @@ export default function TodoForm({ onAdd, categories }: Props) {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label className="mb-1 block text-xs font-medium text-neutral-500">카테고리</label>
-          {categories.filter(c => c !== 'all').length > 0 ? (
-            <select
-              value={category}
-              onChange={e => setCategory(e.target.value)}
-              className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500"
-            >
-              <option value="">직접 입력...</option>
-              {categories.filter(c => c !== 'all').map(c => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-          ) : null}
-          {!category && (
-            <input
-              type="text"
-              placeholder="예: 개인, 업무"
-              value={newCategory}
-              onChange={e => setNewCategory(e.target.value)}
-              className="mt-2 min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none placeholder:text-neutral-600 focus:border-indigo-500"
-            />
-          )}
+          <select
+            value={category}
+            onChange={e => setCategory(e.target.value)}
+            className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500"
+          >
+            <option value="">선택...</option>
+            {allCategories.map(c => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
         </div>
 
         <div>
@@ -128,56 +115,40 @@ export default function TodoForm({ onAdd, categories }: Props) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <div>
-          <label className="mb-1 block text-xs font-medium text-neutral-500">마감일</label>
-          <input
-            type="date"
-            value={deadline}
-            onChange={e => setDeadline(e.target.value)}
-            className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500"
-          />
-        </div>
-
-        <div>
-          <label className="mb-1 block text-xs font-medium text-neutral-500">태그</label>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              placeholder="태그 입력..."
-              value={tagInput}
-              onChange={e => setTagInput(e.target.value)}
-              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addTag() } }}
-              className="min-h-10 min-w-0 flex-1 rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none placeholder:text-neutral-600 focus:border-indigo-500"
-            />
-            <button
-              type="button"
-              onClick={addTag}
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-neutral-700 bg-neutral-800 text-neutral-400 transition-colors hover:bg-neutral-700"
-              aria-label="태그 추가"
-            >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
-              </svg>
-            </button>
-          </div>
-        </div>
+      <div>
+        <label className="mb-1 block text-xs font-medium text-neutral-500">마감일</label>
+        <input
+          type="date"
+          value={deadline}
+          onChange={e => setDeadline(e.target.value)}
+          className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500"
+        />
       </div>
 
-      {tags.length > 0 && (
+      <div>
+        <label className="mb-1.5 block text-xs font-medium text-neutral-500">
+          태그 <span className="text-neutral-600">(클릭으로 선택)</span>
+        </label>
         <div className="flex flex-wrap gap-1.5">
-          {tags.map(tag => (
-            <span key={tag} className="flex items-center gap-1 rounded-full bg-indigo-900/50 px-2.5 py-1 text-xs text-indigo-400">
-              #{tag}
-              <button type="button" onClick={() => removeTag(tag)} className="rounded-full p-0.5 hover:text-indigo-200" aria-label={`${tag} 태그 삭제`}>
-                <svg className="h-3 w-3" fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" d="M4 4l8 8M12 4l-8 8" />
-                </svg>
+          {PRESET_TAGS.map(tag => {
+            const selected = tags.includes(tag)
+            return (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => toggleTag(tag)}
+                className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+                  selected
+                    ? 'border-indigo-500 bg-indigo-600 text-white'
+                    : 'border-neutral-700 bg-neutral-800 text-neutral-400 hover:border-neutral-500 hover:text-neutral-300'
+                }`}
+              >
+                #{tag}
               </button>
-            </span>
-          ))}
+            )
+          })}
         </div>
-      )}
+      </div>
 
       <div className="grid grid-cols-[1fr_auto] gap-2 pt-1">
         <button
