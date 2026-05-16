@@ -20,7 +20,7 @@ export default function Home() {
             </svg>
           </div>
           <div className="min-w-0">
-            <h1 className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">My To-Do</h1>
+            <h1 className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">My To-Do List</h1>
             <p className="mt-0.5 text-sm text-neutral-400">오늘 할 일을 빠르게 정리하세요.</p>
           </div>
         </header>

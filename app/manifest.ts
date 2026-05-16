@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'My To-Do',
-    short_name: 'My To-Do',
+    name: 'My To-Do List',
+    short_name: 'My To-Do List',
     description: '카테고리, 태그, 마감일, 우선순위를 지원하는 할 일 앱',
     start_url: '/',
     display: 'standalone',
