@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: '카테고리, 태그, 마감일, 우선순위를 지원하는 할 일 앱',
     start_url: '/',
     display: 'standalone',
-    background_color: '#0f0f0f',
+    background_color: '#0d1020',
     theme_color: '#4f46e5',
     icons: [
       {

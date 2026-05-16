@@ -44,14 +44,14 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
 
   return (
     <div
-      className={`group flex items-start gap-3 rounded-2xl border-b border-r border-t border-neutral-800 border-l-4 bg-neutral-900 px-3 py-3 shadow-sm transition-shadow hover:shadow-md sm:px-4 ${PRIORITY_BORDER[todo.priority]} ${todo.completed ? 'opacity-50' : ''}`}
+      className={`group flex items-start gap-3 rounded-2xl border-b border-r border-t border-slate-800 border-l-4 bg-slate-900 px-3 py-3 shadow-sm transition-shadow hover:shadow-md sm:px-4 ${PRIORITY_BORDER[todo.priority]} ${todo.completed ? 'opacity-50' : ''}`}
     >
       <button
         onClick={() => onToggle(todo.id)}
         className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors sm:h-6 sm:w-6 ${
           todo.completed
             ? 'border-indigo-500 bg-indigo-500'
-            : 'border-neutral-600 hover:border-indigo-400'
+            : 'border-slate-600 hover:border-indigo-400'
         }`}
         aria-label={todo.completed ? '완료 해제' : '완료 처리'}
       >
@@ -63,7 +63,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
       </button>
 
       <div className="min-w-0 flex-1">
-        <p className={`break-words text-sm font-medium leading-snug ${todo.completed ? 'text-neutral-600 line-through' : 'text-neutral-100'}`}>
+        <p className={`break-words text-sm font-medium leading-snug ${todo.completed ? 'text-slate-500 line-through' : 'text-slate-100'}`}>
           {todo.title}
         </p>
 
@@ -79,7 +79,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
           </span>
 
           {todo.deadline && (
-            <span className={`flex items-center gap-1 text-xs font-medium ${overdue ? 'text-red-400' : 'text-neutral-500'}`}>
+            <span className={`flex items-center gap-1 text-xs font-medium ${overdue ? 'text-red-400' : 'text-slate-500'}`}>
               <svg className="h-3 w-3" fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth={1.5}>
                 <rect x="2" y="3" width="12" height="11" rx="2" />
                 <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
@@ -97,7 +97,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: Props) {
 
       <button
         onClick={() => onDelete(todo.id)}
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-neutral-600 transition-all hover:bg-red-900/40 hover:text-red-400 sm:opacity-0 sm:group-hover:opacity-100"
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-slate-500 transition-all hover:bg-red-900/40 hover:text-red-400 sm:opacity-0 sm:group-hover:opacity-100"
         aria-label="삭제"
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth={1.7}>

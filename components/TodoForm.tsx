@@ -54,7 +54,7 @@ export default function TodoForm({ onAdd, categories }: Props) {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-neutral-700 px-4 py-3 text-sm font-medium text-neutral-400 transition-colors hover:border-indigo-500 hover:text-indigo-400 active:border-indigo-600 active:text-indigo-500"
+        className="flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-700 px-4 py-3 text-sm font-medium text-slate-400 transition-colors hover:border-indigo-500 hover:text-indigo-400 active:border-indigo-600 active:text-indigo-500"
       >
         <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
@@ -65,24 +65,24 @@ export default function TodoForm({ onAdd, categories }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-neutral-700 bg-neutral-900 p-4 shadow-sm">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-700 bg-slate-900 p-4 shadow-sm">
       <input
         autoFocus
         type="text"
         placeholder="할 일을 입력하세요..."
         value={title}
         onChange={e => setTitle(e.target.value)}
-        className="w-full border-b border-neutral-700 pb-3 text-base font-medium text-neutral-100 outline-none transition-colors placeholder:text-neutral-600 focus:border-indigo-500 sm:text-sm bg-transparent"
+        className="w-full border-b border-slate-700 pb-3 text-base font-medium text-slate-100 outline-none transition-colors placeholder:text-slate-500 focus:border-indigo-500 sm:text-sm bg-transparent"
       />
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
-          <label htmlFor="todo-category" className="mb-1 block text-xs font-medium text-neutral-500">카테고리</label>
+          <label htmlFor="todo-category" className="mb-1 block text-xs font-medium text-slate-500">카테고리</label>
           <select
             id="todo-category"
             value={category}
             onChange={e => setCategory(e.target.value)}
-            className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500"
+            className="min-h-10 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 text-sm text-slate-300 outline-none focus:border-indigo-500"
           >
             <option value="">선택...</option>
             {allCategories.map(c => (
@@ -92,7 +92,7 @@ export default function TodoForm({ onAdd, categories }: Props) {
         </div>
 
         <div>
-          <label className="mb-1 block text-xs font-medium text-neutral-500">우선순위</label>
+          <label className="mb-1 block text-xs font-medium text-slate-500">우선순위</label>
           <div className="grid grid-cols-3 gap-1">
             {PRIORITIES.map(p => (
               <button
@@ -106,7 +106,7 @@ export default function TodoForm({ onAdd, categories }: Props) {
                       : p.value === 'medium'
                       ? 'border-amber-400 bg-amber-400 text-white'
                       : 'border-sky-500 bg-sky-500 text-white'
-                    : 'border-neutral-700 bg-neutral-800 text-neutral-400 hover:border-neutral-600'
+                    : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600'
                 }`}
               >
                 {p.label}
@@ -117,19 +117,19 @@ export default function TodoForm({ onAdd, categories }: Props) {
       </div>
 
       <div>
-        <label htmlFor="todo-deadline" className="mb-1 block text-xs font-medium text-neutral-500">마감일</label>
+        <label htmlFor="todo-deadline" className="mb-1 block text-xs font-medium text-slate-500">마감일</label>
         <input
           id="todo-deadline"
           type="date"
           value={deadline}
           onChange={e => setDeadline(e.target.value)}
-          className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500"
+          className="min-h-10 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 text-sm text-slate-300 outline-none focus:border-indigo-500"
         />
       </div>
 
       <div>
-        <label className="mb-1.5 block text-xs font-medium text-neutral-500">
-          태그 <span className="text-neutral-600">(클릭으로 선택)</span>
+        <label className="mb-1.5 block text-xs font-medium text-slate-500">
+          태그 <span className="text-slate-500">(클릭으로 선택)</span>
         </label>
         <div className="flex flex-wrap gap-1.5">
           {PRESET_TAGS.map(tag => {
@@ -142,7 +142,7 @@ export default function TodoForm({ onAdd, categories }: Props) {
                 className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                   selected
                     ? 'border-indigo-500 bg-indigo-600 text-white'
-                    : 'border-neutral-700 bg-neutral-800 text-neutral-400 hover:border-neutral-500 hover:text-neutral-300'
+                    : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-500 hover:text-slate-300'
                 }`}
               >
                 #{tag}
@@ -162,7 +162,7 @@ export default function TodoForm({ onAdd, categories }: Props) {
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="min-h-11 rounded-xl px-4 text-sm font-medium text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-neutral-200"
+          className="min-h-11 rounded-xl px-4 text-sm font-medium text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-200"
         >
           취소
         </button>
