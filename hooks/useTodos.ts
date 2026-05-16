@@ -6,10 +6,25 @@ const STORAGE_KEY = 'todos-v1'
 
 const PRIORITY_ORDER: Record<Priority, number> = { high: 0, medium: 1, low: 2 }
 
+function isValidTodo(item: unknown): item is Todo {
+  if (typeof item !== 'object' || item === null) return false
+  const t = item as Record<string, unknown>
+  return (
+    typeof t.id === 'string' &&
+    typeof t.title === 'string' &&
+    typeof t.completed === 'boolean' &&
+    Array.isArray(t.tags) &&
+    typeof t.createdAt === 'string'
+  )
+}
+
 function readStoredTodos(): Todo[] {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
-    return stored ? JSON.parse(stored) : []
+    if (!stored) return []
+    const parsed: unknown = JSON.parse(stored)
+    if (!Array.isArray(parsed)) return []
+    return parsed.filter(isValidTodo)
   } catch {
     return []
   }
@@ -67,7 +82,7 @@ export function useTodos() {
       return true
     })
     .sort((a, b) => {
-      const by = filter.sortBy as SortBy
+      const by = filter.sortBy
       if (by === 'priority') return PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority]
       if (by === 'deadline') {
         if (!a.deadline && !b.deadline) return 0

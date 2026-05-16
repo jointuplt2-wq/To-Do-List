@@ -77,8 +77,9 @@ export default function TodoForm({ onAdd, categories }: Props) {
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
-          <label className="mb-1 block text-xs font-medium text-neutral-500">카테고리</label>
+          <label htmlFor="todo-category" className="mb-1 block text-xs font-medium text-neutral-500">카테고리</label>
           <select
+            id="todo-category"
             value={category}
             onChange={e => setCategory(e.target.value)}
             className="min-h-10 w-full rounded-xl border border-neutral-700 bg-neutral-800 px-3 text-sm text-neutral-300 outline-none focus:border-indigo-500"
@@ -116,8 +117,9 @@ export default function TodoForm({ onAdd, categories }: Props) {
       </div>
 
       <div>
-        <label className="mb-1 block text-xs font-medium text-neutral-500">마감일</label>
+        <label htmlFor="todo-deadline" className="mb-1 block text-xs font-medium text-neutral-500">마감일</label>
         <input
+          id="todo-deadline"
           type="date"
           value={deadline}
           onChange={e => setDeadline(e.target.value)}

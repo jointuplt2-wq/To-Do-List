@@ -27,12 +27,16 @@ const PRIORITY_BADGE: Record<Priority, string> = {
 
 function isOverdue(deadline: string | null): boolean {
   if (!deadline) return false
-  return new Date(deadline) < new Date(new Date().toDateString())
+  const [year, month, day] = deadline.split('-').map(Number)
+  const today = new Date()
+  const deadlineDate = new Date(year, month - 1, day)
+  const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  return deadlineDate < todayDate
 }
 
 function formatDeadline(deadline: string): string {
-  const d = new Date(deadline)
-  return `${d.getMonth() + 1}/${d.getDate()}`
+  const [, month, day] = deadline.split('-')
+  return `${Number(month)}/${Number(day)}`
 }
 
 export default function TodoItem({ todo, onToggle, onDelete }: Props) {
