@@ -1,13 +1,25 @@
 'use client'
 import { useTodos } from '@/hooks/useTodos'
+import { useNotifications } from '@/hooks/useNotifications'
 import TodoForm from '@/components/TodoForm'
 import TodoItem from '@/components/TodoItem'
 import TodoFilter from '@/components/TodoFilter'
+import ReflectionSection from '@/components/ReflectionSection'
 
 export default function Home() {
   const { todos, allTodos, addTodo, toggleTodo, deleteTodo, loaded, filter, setFilter, categories } = useTodos()
+  const { permission, requestPermission } = useNotifications(allTodos, loaded)
 
   const activeCount = allTodos.filter(t => !t.completed).length
+
+  const handleBell = async () => {
+    if (permission === 'granted') return
+    if (permission === 'denied') {
+      alert('브라우저에서 알림이 차단되어 있습니다.\nChrome 주소창 왼쪽 자물쇠 아이콘 → 알림 → 허용으로 변경해 주세요.')
+      return
+    }
+    await requestPermission()
+  }
 
   return (
     <main className="min-h-dvh" style={{ background: 'var(--background)' }}>
@@ -19,10 +31,31 @@ export default function Home() {
               <path strokeLinecap="round" strokeLinejoin="round" d="m16 16 2 2 4-5" />
             </svg>
           </div>
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <h1 className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">My To-Do List</h1>
             <p className="mt-0.5 text-sm text-slate-400">오늘 할 일을 빠르게 정리하세요.</p>
           </div>
+          <button
+            onClick={handleBell}
+            title={permission === 'granted' ? '알림 켜짐' : permission === 'denied' ? '알림 차단됨 (클릭하여 해제 방법 보기)' : '알림 켜기'}
+            className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-colors ${
+              permission === 'granted'
+                ? 'border-indigo-500 bg-indigo-600 text-white'
+                : permission === 'denied'
+                ? 'border-slate-700 bg-slate-800 text-slate-600'
+                : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-indigo-500 hover:text-indigo-400'
+            }`}
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+            {permission === 'granted' && (
+              <span className="absolute -right-1 -top-1 h-2 w-2 rounded-full bg-indigo-400" />
+            )}
+            {permission === 'denied' && (
+              <span className="absolute -right-1 -top-1 flex h-3 w-3 items-center justify-center rounded-full bg-slate-700 text-[8px] text-slate-400">✕</span>
+            )}
+          </button>
         </header>
 
         <div className="flex-1 space-y-4">
@@ -66,6 +99,8 @@ export default function Home() {
               />
             ))}
           </div>
+
+          <ReflectionSection />
         </div>
       </div>
     </main>

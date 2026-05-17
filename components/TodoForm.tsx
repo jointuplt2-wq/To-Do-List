@@ -65,24 +65,24 @@ export default function TodoForm({ onAdd, categories }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-700 bg-slate-900 p-4 shadow-sm">
+    <form onSubmit={handleSubmit} className="space-y-3 rounded-2xl border border-slate-700 bg-slate-900 p-3 shadow-sm">
       <input
         autoFocus
         type="text"
         placeholder="할 일을 입력하세요..."
         value={title}
         onChange={e => setTitle(e.target.value)}
-        className="w-full border-b border-slate-700 pb-3 text-base font-medium text-slate-100 outline-none transition-colors placeholder:text-slate-500 focus:border-indigo-500 sm:text-sm bg-transparent"
+        className="w-full border-b border-slate-700 pb-2 text-sm font-medium text-slate-100 outline-none transition-colors placeholder:text-slate-500 focus:border-indigo-500 bg-transparent"
       />
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         <div>
           <label htmlFor="todo-category" className="mb-1 block text-xs font-medium text-slate-500">카테고리</label>
           <select
             id="todo-category"
             value={category}
             onChange={e => setCategory(e.target.value)}
-            className="min-h-10 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 text-sm text-slate-300 outline-none focus:border-indigo-500"
+            className="min-h-9 w-full rounded-xl border border-slate-700 bg-slate-800 px-2.5 text-xs text-slate-300 outline-none focus:border-indigo-500"
           >
             <option value="">선택...</option>
             {allCategories.map(c => (
@@ -99,7 +99,7 @@ export default function TodoForm({ onAdd, categories }: Props) {
                 key={p.value}
                 type="button"
                 onClick={() => setPriority(p.value)}
-                className={`min-h-10 rounded-xl border px-2 text-sm font-medium transition-colors ${
+                className={`min-h-9 rounded-xl border px-2 text-xs font-medium transition-colors ${
                   priority === p.value
                     ? p.value === 'high'
                       ? 'border-red-500 bg-red-500 text-white'
@@ -123,15 +123,15 @@ export default function TodoForm({ onAdd, categories }: Props) {
           type="date"
           value={deadline}
           onChange={e => setDeadline(e.target.value)}
-          className="min-h-10 w-full rounded-xl border border-slate-700 bg-slate-800 px-3 text-sm text-slate-300 outline-none focus:border-indigo-500"
+          className="min-h-9 w-full rounded-xl border border-slate-700 bg-slate-800 px-2.5 text-xs text-slate-300 outline-none focus:border-indigo-500"
         />
       </div>
 
       <div>
-        <label className="mb-1.5 block text-xs font-medium text-slate-500">
-          태그 <span className="text-slate-500">(클릭으로 선택)</span>
+        <label className="mb-1 block text-xs font-medium text-slate-500">
+          태그 <span className="text-slate-600">(클릭으로 선택)</span>
         </label>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1">
           {PRESET_TAGS.map(tag => {
             const selected = tags.includes(tag)
             return (
@@ -139,7 +139,7 @@ export default function TodoForm({ onAdd, categories }: Props) {
                 key={tag}
                 type="button"
                 onClick={() => toggleTag(tag)}
-                className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+                className={`rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors ${
                   selected
                     ? 'border-indigo-500 bg-indigo-600 text-white'
                     : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-500 hover:text-slate-300'
@@ -152,17 +152,17 @@ export default function TodoForm({ onAdd, categories }: Props) {
         </div>
       </div>
 
-      <div className="grid grid-cols-[1fr_auto] gap-2 pt-1">
+      <div className="grid grid-cols-[1fr_auto] gap-2">
         <button
           type="submit"
-          className="min-h-11 rounded-xl bg-indigo-600 px-4 text-sm font-medium text-white transition-colors hover:bg-indigo-500"
+          className="min-h-9 rounded-xl bg-indigo-600 px-4 text-xs font-medium text-white transition-colors hover:bg-indigo-500"
         >
           추가
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="min-h-11 rounded-xl px-4 text-sm font-medium text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-200"
+          className="min-h-9 rounded-xl px-4 text-xs font-medium text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-200"
         >
           취소
         </button>
