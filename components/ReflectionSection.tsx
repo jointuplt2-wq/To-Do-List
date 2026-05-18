@@ -48,30 +48,28 @@ export default function ReflectionSection() {
           <svg className="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487a2.25 2.25 0 0 1 3.182 3.182L7.5 20.213l-4.5 1.5 1.5-4.5L16.862 4.487Z" />
           </svg>
-          <div className="flex items-center gap-1">
-            <button
-              onClick={() => setDate(prev => addDays(prev, -1))}
-              className="rounded-lg p-0.5 text-slate-500 transition-colors hover:text-slate-300"
-            >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <span className="min-w-[120px] text-center text-sm font-semibold text-slate-300">{label}</span>
-            <button
-              onClick={() => setDate(prev => addDays(prev, 1))}
-              disabled={today}
-              className="rounded-lg p-0.5 text-slate-500 transition-colors hover:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+          <h2 className="text-sm font-semibold text-slate-300">오늘의 반성</h2>
         </div>
-        <span className={`text-xs transition-colors ${saved ? 'text-slate-600' : 'text-indigo-400'}`}>
-          {saved ? '저장됨' : '저장 중...'}
-        </span>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setDate(prev => addDays(prev, -1))}
+            className="rounded-lg p-0.5 text-slate-500 transition-colors hover:text-slate-300"
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <span className="text-xs font-medium text-slate-400">{label}</span>
+          <button
+            onClick={() => setDate(prev => addDays(prev, 1))}
+            disabled={today}
+            className="rounded-lg p-0.5 text-slate-500 transition-colors hover:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
       <textarea
         value={text}
