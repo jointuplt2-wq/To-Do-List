@@ -31,7 +31,12 @@ export default function ReflectionSection() {
           <svg className="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487a2.25 2.25 0 0 1 3.182 3.182L7.5 20.213l-4.5 1.5 1.5-4.5L16.862 4.487Z" />
           </svg>
-          <h2 className="text-sm font-semibold text-slate-300">오늘의 반성</h2>
+          <h2 className="text-sm font-semibold text-slate-300">
+            오늘의 반성
+            <span className="ml-2 text-xs font-normal text-slate-500">
+              {new Date().toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' })}
+            </span>
+          </h2>
         </div>
         <span className={`text-xs transition-colors ${saved ? 'text-slate-600' : 'text-indigo-400'}`}>
           {saved ? '저장됨' : '저장 중...'}
