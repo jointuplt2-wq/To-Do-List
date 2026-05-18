@@ -30,9 +30,9 @@ export default function ReflectionSection() {
           <svg className="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487a2.25 2.25 0 0 1 3.182 3.182L7.5 20.213l-4.5 1.5 1.5-4.5L16.862 4.487Z" />
           </svg>
-          <h2 className="text-xs font-semibold text-slate-300">오늘의 반성</h2>
+          <h2 className="text-sm font-semibold text-slate-300">오늘의 반성</h2>
         </div>
-        <span className={`text-[10px] transition-colors ${saved ? 'text-slate-600' : 'text-indigo-400'}`}>
+        <span className={`text-xs transition-colors ${saved ? 'text-slate-600' : 'text-indigo-400'}`}>
           {saved ? '저장됨' : '저장 중...'}
         </span>
       </div>
@@ -41,7 +41,7 @@ export default function ReflectionSection() {
         onChange={e => handleChange(e.target.value)}
         placeholder="오늘 하루를 돌아보며 느낀 점을 적어보세요."
         rows={4}
-        className="w-full resize-none rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs text-slate-300 outline-none transition-colors placeholder:text-slate-600 focus:border-indigo-500"
+        className="w-full resize-none rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-300 outline-none transition-colors placeholder:text-slate-600 focus:border-indigo-500"
       />
     </section>
   )
