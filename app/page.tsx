@@ -14,8 +14,8 @@ export default function Home() {
     <main className="min-h-dvh" style={{ background: 'var(--background)' }}>
       <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col px-4 pb-8 pt-5 sm:px-6 sm:py-10">
         <header className="mb-5 flex items-center gap-3 sm:mb-8">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-indigo-300 text-indigo-900 shadow-md">
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-indigo-500 text-white shadow-sm">
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 7h14M5 12h10M5 17h6" />
               <path strokeLinecap="round" strokeLinejoin="round" d="m16 16 2 2 4-5" />
             </svg>

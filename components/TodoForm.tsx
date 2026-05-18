@@ -123,7 +123,7 @@ export default function TodoForm({ onAdd, categories }: Props) {
           type="date"
           value={deadline}
           onChange={e => setDeadline(e.target.value)}
-          className="min-h-9 w-full rounded-xl border border-slate-700 bg-slate-800 px-2.5 text-xs text-slate-300 outline-none focus:border-indigo-500"
+          className="min-h-9 w-full rounded-xl border border-slate-700 bg-slate-800 px-2.5 text-xs text-slate-300 outline-none focus:border-indigo-500 [color-scheme:dark]"
         />
       </div>
 
