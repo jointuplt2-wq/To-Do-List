@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 
-const STORAGE_KEY = 'todo-reflection'
+const storageKey = () => `todo-reflection-${new Date().toLocaleDateString('sv')}`
 
 export default function ReflectionSection() {
   const [text, setText] = useState('')
@@ -9,8 +9,9 @@ export default function ReflectionSection() {
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY)
+    const stored = localStorage.getItem(storageKey())
     if (stored) setText(stored)
+    else setText('')
   }, [])
 
   const handleChange = (value: string) => {
@@ -18,7 +19,7 @@ export default function ReflectionSection() {
     setSaved(false)
     if (saveTimer.current) clearTimeout(saveTimer.current)
     saveTimer.current = setTimeout(() => {
-      localStorage.setItem(STORAGE_KEY, value)
+      localStorage.setItem(storageKey(), value)
       setSaved(true)
     }, 800)
   }
